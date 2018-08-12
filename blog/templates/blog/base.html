@@ -8,6 +8,54 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <link rel="stylesheet" href="http://picturebag.qiniudn.com/blog.css">
+<style type="text/css">
+/*定义一些颜色，以便看到各模块的位置*/
+.c1 {
+    background-color: #1abc9c;
+    color: #FFF;
+}
+.c2 {
+    background-color: #2980b9;
+    color: #FFF;
+}
+.c3 {
+    background-color: #8e44ad;
+    color: #FFF;
+}
+.c4 {
+    background-color: #f39c12;
+    color: #FFF;
+}
+.c5 {
+    background-color: #c0392b;
+    color: #FFF;
+}
+.c6 {
+    background-color: #999999;
+    color: #FFF;
+}
+.ph-500 {
+    min-height: 500px;
+}/*用于占位*/
+.ph-50 {
+    min-height: 50px;
+}/*用于占位*/
+.ph-100 {
+    min-height: 100px;
+}/*用于占位*/
+.ph-200 {
+    min-height: 200px;
+}/*用于占位*/
+.mg {
+    margin: 3px;
+}/*增加边距*/
+.main {
+    max-width: 1000px;
+    margin: 0 auto;
+}/*页面主体*/
+</style>
+
+
 </head>
 <body>
 <div id="layout" class="pure-g">
@@ -18,22 +66,23 @@
             <nav class="nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a class="button-success pure-button" href="/">主页</a>
+                        <a class="button-success pure-button" href="/blog/home">主页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="button-success pure-button" href="/">归档</a>
+                        <a class="button-success pure-button" href="/blog/index">归档</a>
                     </li>
                     <li class="nav-item">
                         <a class="pure-button" href="/">Github</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="button-error pure-button" href="/">微博</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="button-success pure-button" href="/">专题</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="button-success pure-button" href="/">About Me</a>
+
+                    <li class="c3" >
+                            {% if user.is_authenticated %}
+                                <a class="button-success pure-button" href="/blog/home">{{ user.username }}</a>
+                                <a class="button-success pure-button" href="/blog/logout/">退出</a>
+                            {% else %}
+                                <a class="button-success pure-button" href="/blog/register/">注册</a>
+                                <a class="button-success pure-button" href="/blog/login/">登录</a>
+                            {% endif %}
                     </li>
                 </ul>
             </nav>

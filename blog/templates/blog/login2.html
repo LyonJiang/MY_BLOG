@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+ 
+{% block content %}
+ 
+<br>
+================
+
+
+<br>
+{% if error %}
+        登录失败
+            <li>
+
+                {% for error in errors %}
+                 <p style="color: red;">
+                    {{error}}
+                 </p>
+                  {% endfor %}
+            </li>
+<a href="http://127.0.0.1:8000/blog/register">注册</a>
+{% else %}
+登录成功！
+<a href="http://127.0.0.1:8000/blog/home">主页</a>
+{% endif %}
+ 
+{% endblock %}

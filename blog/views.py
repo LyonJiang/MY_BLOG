@@ -9,10 +9,10 @@ from django.shortcuts import render
 from django.http import Http404
 
 
-def Test(request):
-    # post = Article.objects.all()
-    # return HttpResponse(post[0].content)
-    return render(request, 'blog/test.html', {'current_time': datetime.now()})
+def index(request):
+    return render(request,'blog/index.html')
+def single(request):
+    return render(request,'blog/singlepost.html')
 
 def Detail(request,id):
     try:
@@ -52,11 +52,6 @@ def register(request):
         else:
             email=request.POST.get('email')
 
-        # if not request.POST.get('tel'):
-        #     error.append('请输入电话')
-        # else:
-        #     tel=request.POST.get('tel')
-
         if password is not None:
             if password == password2:
                 CompareFlag = True
@@ -66,40 +61,40 @@ def register(request):
         if username is not None and password is not None and email is not None  and CompareFlag:
             user=User.objects.create_user(username,email,password)
             user.save()
+            return render(request, 'blog/register2.html', {'error': error})
 
-            userlogin = auth.authenticate(username=username,password=password)
-            auth.login(request,userlogin)
-            return HttpResponseRedirect('/blog/home')
     return render(request,'blog/register.html',{'error':error})
 
 
 
 def login(request):
     errors = []
-    account = None
+    username = None
     password = None
     if request.method == "POST":
-        if not request.POST.get('account'):
+        if not request.POST.get('username'):
             errors.append('用户名不能为空')
         else:
-            account = request.POST.get('account')
+            username = request.POST.get('username')
 
         if not request.POST.get('password'):
             errors = request.POST.get('密码不能为空')
         else:
             password = request.POST.get('password')
 
-        if account is not None and password is not None:
-            user = auth.authenticate(username=account, password=password)
+        if username is not None and password is not None:
+            user = auth.authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     auth.login(request, user)
-                    return HttpResponseRedirect('/blog')
+                    return render(request, 'blog/login2.html', {'errors': errors})
                 else:
                     errors.append('用户名错误')
             else:
                 errors.append('用户名或密码错误')
     return render(request, 'blog/login.html', {'errors': errors})
-def my_logout(request):
+
+
+def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/blog/home')
+    return render(request,'blog/base.html')

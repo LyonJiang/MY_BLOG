@@ -20,7 +20,7 @@ from django.conf import settings
 import blog.urls as blog_url
 
 urlpatterns = [
-    url(r'^',include(blog_url)),
+    # url(r'^',include(blog_url)),
     url(r'^blog/',include(blog_url)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ueditor/',include(djud_urls)),

@@ -105,10 +105,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 公共的static文件
 STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, "common_static"),
     os.path.join(BASE_DIR, "media"),
 )
